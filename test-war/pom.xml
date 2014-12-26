@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>test-war</artifactId>
+  <packaging>war</packaging>
+
+  <name>Jetty Web Socket Class Loading Test War</name>
+
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>test</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>test-jar</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>test</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${jetty.version}</version>
+        <configuration>
+          <scanIntervalSeconds>10</scanIntervalSeconds>
+          <webAppConfig>
+            <contextPath>/test</contextPath>
+          </webAppConfig>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

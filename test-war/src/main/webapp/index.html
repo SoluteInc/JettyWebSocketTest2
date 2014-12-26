@@ -1,0 +1,37 @@
+<html>
+  <body>
+    <div id="output"></div>
+    <script type="text/javascript">
+    var output = document.getElementById("output");
+    
+    var wsUri = "ws://" + document.location.host + "/test/ws";
+    var websocket = new WebSocket(wsUri);
+    websocket.onerror = function(evt) { onError(evt) };
+    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket.onmessage = function(evt) { onMessage(evt) };
+    websocket.onclose = function(evt) { onClose(evt) };
+    
+    function onError(evt) {
+        writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+    }
+    
+    function onMessage(evt) {
+        console.log("received: " + evt.data);
+        writeToScreen(evt.data);
+    }
+    
+    function writeToScreen(message) {
+        output.innerHTML += message + "<br>";
+    }
+
+    function onOpen() {
+        writeToScreen("Connected to " + wsUri);
+        websocket.send("a message");
+    }
+    
+    function onClose() {
+        writeToScreen("Failed: Connection Closed.");
+    }  
+    </script>
+  </body>
+</html>
